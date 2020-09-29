@@ -50,22 +50,22 @@ namespace Linked_List_Homework
         }
         public string SearchNodes(string question)
         {
-            Node temp = head;
+            Node current = head;
             if (isHeadNull())
             {
                 return "list empty"; 
             }
             //if first item is the node looking for
-            if (temp.data == question)
+            if (current.data == question)
             {
                 return question + " is here";
             }
-            while (temp.next != null)
+            while (current.next != null)
             {
 
-                temp = temp.next;
+                current = current.next;
                 // to not skip the last item in the list
-                if (temp.data == question)
+                if (current.data == question)
                 {
                     return question + " is here";
                 }
@@ -75,7 +75,7 @@ namespace Linked_List_Homework
         }
         public void PrintAllNodes()
         {
-            Node temp = head;
+            Node current = head;
 
             if (isHeadNull())
             {
@@ -84,28 +84,20 @@ namespace Linked_List_Homework
             }
             else //first item of the list
             {
-                Console.WriteLine(temp.data);
+                Console.WriteLine(current.data);
             }
             
-            while (temp.next != null)
+            while (current.next != null)
             {
-                temp = temp.next;
-                Console.WriteLine(temp.data);
+                current = current.next;
+                Console.WriteLine(current.data);
             }
 
         }
-        public Node MoveDownList()
-        {
-            Node temp = head;
-            while (temp.next != null)
-            {
-                temp = temp.next;
-            }
-            return temp;
-        }
+
         public string RemoveNode(string item)
         {
-            Node temp = head;
+            Node current = head;
             Node previous = null;
             //checks if list is empty
             if (isHeadNull())
@@ -113,30 +105,40 @@ namespace Linked_List_Homework
                 return "list empty";
             }
             //checks if the list has only one item and if that item is the item to be removed 
-            if (temp.next == null && temp.data == item)
+            if (current.next == null && current.data == item)
             {
                 return item + " removed.";
             }
             //checks if the first item in the list of more then one item is the item to be removed
-            if (temp.next != null && temp.data == item)
+            if (current.next != null && current.data == item)
             {
-                head = temp.next;
+                head = current.next;
                 return item + " removed.";
             }
             //searches through the list to see if the item exists
-            while (temp.next != null && temp.data != item)
+            while (current.next != null && current.data != item)
             {
-                previous = temp;
-                temp = temp.next;
+                previous = current;
+                current = current.next;
             }
             //respons if item not found
-            if (temp.next == null && temp.data != item)
+            if (current.next == null && current.data != item)
             {
                 return item + " not found";
             }
             //if item was found it will remove the node and keep the list linked.
-            previous.next = temp.next;
+            previous.next = current.next;
             return item + " removed.";
+        }
+
+        public Node MoveDownList()
+        {
+            Node current = head;
+            while (current.next != null)
+            {
+                current = current.next;
+            }
+            return current;
         }
         private bool isHeadNull()
         {
